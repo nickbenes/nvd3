@@ -197,4 +197,3 @@ describe 'NVD3', ->
               height: 300
             builder.build options, sampleData
             parseInt( builder.$(".nv-rangeMax")[0].getAttribute('height') ).should.be.equal 300
-
