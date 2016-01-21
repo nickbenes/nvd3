@@ -1,12 +1,13 @@
 {
   "name": "nvd3",
-  "homepage": "http://www.nvd3.org",
+  "homepage": "https://github.com/nickbenes/nvd3",
   "authors": [
     "Bob Monteverde",
     "Tyler Wolf",
     "Robin Hu",
     "Frank Shao",
-    "liquidpele"
+    "liquidpele",
+	"Nick Benes"
   ],
   "description": "Re-usable charts and chart components for d3.",
   "main": [
@@ -19,7 +20,7 @@
     "svg",
     "charts"
   ],
-  "license": "Apache-2.0",
+  "license": "MIT",
   "dependencies": {
     "d3": "^3.4.4"
   },

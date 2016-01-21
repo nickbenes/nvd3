@@ -7,8 +7,8 @@
     "chart",
     "graph"
   ],
-  "homepage": "https://github.com/novus/nvd3",
-  "license": "Apache-2.0",
+  "homepage": "https://github.com/nickbenes/nvd3",
+  "license": "MIT",
   "authors": [
     {
       "name": "Bob Monteverde"
@@ -24,7 +24,10 @@
     },
     {
       "name": "liquidpele"
-    }
+    },
+    {
+      "name": "Nick Benes"
+	}
   ],
   "require": {
     "mbostock/d3": "@stable"
