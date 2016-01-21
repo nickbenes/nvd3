@@ -64,6 +64,8 @@
         chart.xAxis.tickFormat(d3.format(',f'));
         chart.yAxis1.tickFormat(d3.format(',.1f'));
         chart.yAxis2.tickFormat(d3.format(',.1f'));
+		chart.forceY1([-10, 10]);
+		chart.forceY2([0,5]);
 
         d3.select('#chart1 svg')
             .datum(testdata)

@@ -13,6 +13,8 @@ nv.models.multiChart = function() {
         noData = null,
         yDomain1,
         yDomain2,
+		forceY1 = [],
+		forceY2 = [],
         getX = function(d) { return d.x },
         getY = function(d) { return d.y},
         interpolate = 'monotone',
@@ -206,10 +208,10 @@ nv.models.multiChart = function() {
                 return a.map(function(aVal,i){return {x: aVal.x, y: aVal.y + b[i].y}})
             }).concat([{x:0, y:0}]) : [];
 
-            yScale1 .domain(yDomain1 || d3.extent(d3.merge(series1).concat(extraValue1), function(d) { return d.y } ))
+            yScale1 .domain(yDomain1 || d3.extent(d3.merge(series1).concat(extraValue1).concat(forceY1), function(d) { return d.y || d } ))
                 .range([0, availableHeight]);
 
-            yScale2 .domain(yDomain2 || d3.extent(d3.merge(series2).concat(extraValue2), function(d) { return d.y } ))
+            yScale2 .domain(yDomain2 || d3.extent(d3.merge(series2).concat(extraValue2).concat(forceY2), function(d) { return d.y || d } ))
                 .range([0, availableHeight]);
 
             lines1.yDomain(yScale1.domain());
@@ -497,7 +499,9 @@ nv.models.multiChart = function() {
         height:     {get: function(){return height;}, set: function(_){height=_;}},
         showLegend: {get: function(){return showLegend;}, set: function(_){showLegend=_;}},
         yDomain1:      {get: function(){return yDomain1;}, set: function(_){yDomain1=_;}},
-        yDomain2:    {get: function(){return yDomain2;}, set: function(_){yDomain2=_;}},
+        yDomain2: { get: function () { return yDomain2; }, set: function (_) { yDomain2 = _; } },
+		forceY1: { get: function () { return forceY1; }, set: function (_) { forceY1 = _; } },
+		forceY2: { get: function () { return forceY2; }, set: function (_) { forceY2 = _; } },
         noData:    {get: function(){return noData;}, set: function(_){noData=_;}},
         interpolate:    {get: function(){return interpolate;}, set: function(_){interpolate=_;}},
         legendRightAxisHint:    {get: function(){return legendRightAxisHint;}, set: function(_){legendRightAxisHint=_;}},
