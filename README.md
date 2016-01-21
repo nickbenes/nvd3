@@ -1,6 +1,7 @@
 ## NVD3 - A reusable D3 charting library
 
-**NB:** This fork contains modifications to the NVD3 library that support projects on which I am working. For the original, please visit [https://github.com/novus/nvd3].
+**NB:** This fork contains modifications to the NVD3 library that support projects on which I am working. For the original, please visit [https://github.com/novus/nvd3]. Specific updates include:
+* Added `forceY1` and `forceY2` options to the multi-chart. 
 
 Inspired by the work of Mike Bostock's [Towards Reusable Charts](http://bost.ocks.org/mike/chart/), and supported by a combined effort of [Novus](http://www.novus.com) and the NVD3 community.
 
