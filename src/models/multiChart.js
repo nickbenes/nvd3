@@ -13,8 +13,8 @@ nv.models.multiChart = function() {
         noData = null,
         yDomain1,
         yDomain2,
-		forceY1 = [],
-		forceY2 = [],
+        forceY1 = [],
+        forceY2 = [],
         getX = function(d) { return d.x },
         getY = function(d) { return d.y},
         interpolate = 'monotone',
@@ -207,14 +207,16 @@ nv.models.multiChart = function() {
             var extraValue1 = dataStack1.length ? dataStack1.map(function(a){return a.values}).reduce(function(a,b){
                 return a.map(function(aVal,i){return {x: aVal.x, y: aVal.y + b[i].y}})
             }).concat([{x:0, y:0}]) : [];
+            extraValue1 = extraValue1.concat(forceY1.map(function(val){return {y: val}}));
             var extraValue2 = dataStack2.length ? dataStack2.map(function(a){return a.values}).reduce(function(a,b){
                 return a.map(function(aVal,i){return {x: aVal.x, y: aVal.y + b[i].y}})
             }).concat([{x:0, y:0}]) : [];
-
-            yScale1 .domain(yDomain1 || d3.extent(d3.merge(series1).concat(extraValue1).concat(forceY1), function(d) { return d.y || d } ))
+            extraValue2 = extraValue2.concat(forceY2.map(function(val){return {y: val}}));
+            
+            yScale1 .domain(yDomain1 || d3.extent(d3.merge(series1).concat(extraValue1).concat(forceY1),function(d){return d.y}))
                 .range([0, availableHeight]);
 
-            yScale2 .domain(yDomain2 || d3.extent(d3.merge(series2).concat(extraValue2).concat(forceY2), function(d) { return d.y || d } ))
+            yScale2 .domain(yDomain2 || d3.extent(d3.merge(series2).concat(extraValue2).concat(forceY2),function(d){return d.y}))
                 .range([0, availableHeight]);
 
             lines1.yDomain(yScale1.domain());
@@ -515,8 +517,8 @@ nv.models.multiChart = function() {
         showLegend: {get: function(){return showLegend;}, set: function(_){showLegend=_;}},
         yDomain1:      {get: function(){return yDomain1;}, set: function(_){yDomain1=_;}},
         yDomain2: { get: function () { return yDomain2; }, set: function (_) { yDomain2 = _; } },
-		forceY1: { get: function () { return forceY1; }, set: function (_) { forceY1 = _; } },
-		forceY2: { get: function () { return forceY2; }, set: function (_) { forceY2 = _; } },
+        forceY1: { get: function () { return forceY1; }, set: function (_) { forceY1 = _; } },
+        forceY2: { get: function () { return forceY2; }, set: function (_) { forceY2 = _; } },
         noData:    {get: function(){return noData;}, set: function(_){noData=_;}},
         interpolate:    {get: function(){return interpolate;}, set: function(_){interpolate=_;}},
         legendRightAxisHint:    {get: function(){return legendRightAxisHint;}, set: function(_){legendRightAxisHint=_;}},
