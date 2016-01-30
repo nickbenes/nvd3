@@ -1,4 +1,4 @@
-/* nvd3 version v1.8.1-nb2 (https://github.com/nickbenes/nvd3) 2016-01-27 */
+/* nvd3 version v1.8.1-nb2 (https://github.com/nickbenes/nvd3) 2016-01-30 */
 (function(){
 
 // set up main nv object
@@ -9050,7 +9050,8 @@ nv.models.multiChart = function() {
         useVoronoi = true,
         interactiveLayer = nv.interactiveGuideline(),
         useInteractiveGuideline = false,
-        legendRightAxisHint = ' (right axis)'
+        legendRightAxisHint = ' (right axis)',
+		xAxisScale = null
         ;
 
     //============================================================
@@ -9082,6 +9083,7 @@ nv.models.multiChart = function() {
         dispatch = d3.dispatch();
 
     var charts = [lines1, lines2, scatters1, scatters2, bars1, bars2, stack1, stack2];
+	var chartNames = ['lines1', 'lines2', 'scatters1', 'scatters2', 'bars1', 'bars2', 'stack1', 'stack2'];
 
     function chart(selection) {
         selection.each(function(data) {
@@ -9267,6 +9269,10 @@ nv.models.multiChart = function() {
             if(dataScatters1.length){d3.transition(scatters1Wrap).call(scatters1);}
             if(dataScatters2.length){d3.transition(scatters2Wrap).call(scatters2);}
 
+			if (xAxisScale && chartNames.indexOf(xAxisScale) >= 0) {
+				xAxis.scale(charts[chartNames.indexOf(xAxisScale)].xScale());	
+			}
+			
             xAxis
                 ._ticks( nv.utils.calcTicksX(availableWidth/100, data) )
                 .tickSize(-availableHeight, 0);
@@ -9536,6 +9542,7 @@ nv.models.multiChart = function() {
         noData:    {get: function(){return noData;}, set: function(_){noData=_;}},
         interpolate:    {get: function(){return interpolate;}, set: function(_){interpolate=_;}},
         legendRightAxisHint:    {get: function(){return legendRightAxisHint;}, set: function(_){legendRightAxisHint=_;}},
+		xAxisScale:	{get: function() {return xAxisScale;}, set: function(_){xAxisScale=_;}},
 
         // options that require extra logic in the setter
         margin: {get: function(){return margin;}, set: function(_){
